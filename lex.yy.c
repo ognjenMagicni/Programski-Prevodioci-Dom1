@@ -785,15 +785,15 @@ YY_RULE_SETUP
 case 21:
 YY_RULE_SETUP
 #line 31 "flexFile.l"
-{
+{   
     column+=strlen(yytext);
     if(strlen(yytext)>1){
         if(yytext[0]=='0')
-            printf("Greska: los decimalni broj '%s' na liniji %d i koloni %d",yytext,row,column);
+            printf("Greska: los decimalni broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
         else
-            printf("T_DECN(%s) ",yytext);    
+            printf("T_DEC(%s) ",yytext);    
     }else{
-        printf("T_DECN(%s) ",yytext);
+        printf("T_DEC(%s) ",yytext);
     }
     }
 	YY_BREAK
@@ -803,14 +803,14 @@ YY_RULE_SETUP
 {
     column+=strlen(yytext);
     if(strlen(yytext)==2)
-        printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d",yytext,row,column);
+        printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
     else if(strlen(yytext)>3){
         if(yytext[2]=='0')
-            printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d",yytext,row,column);
+            printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
         else
-            printf("T_HEXN(%s) ",yytext);    
+            printf("T_HEX(%s) ",yytext);    
     }else{
-        printf("T_HEXN(%s) ",yytext);
+        printf("T_HEX(%s) ",yytext);
     }
     }
 	YY_BREAK
@@ -827,18 +827,30 @@ YY_RULE_SETUP
     char* ptre = strchr(yytext,'e');
 
     if(posDot==0)
-        printf("Greska: los double broj '%s' na liniji %d i koloni %d",yytext,row,column);
+        printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
 
     else if(posDot>1 && yytext[0]=='0')
-        printf("Greska: los double broj '%s' na liniji %d i koloni %d",yytext,row,column);
+        printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
 
     else if(ptrE!=NULL || ptre!=NULL){
-        int posE = ptrE!=NULL? (ptrE-yytext):(ptre-yytext);
+        int posE = (ptrE!=NULL)? (ptrE-yytext):(ptre-yytext);
         if(strlen(yytext)-1==posE)
-            printf("Greska: los double broj '%s' na liniji %d i koloni %d",yytext,row,column);
-        /*else{
-            posE = yytext[posE]=='+' || yytext[posE]=='-'?;
-        }*/
+            printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
+        else{
+            if(yytext[posE+1]=='+' || yytext[posE+1]=='-'){
+                if(strlen(yytext)-1>posE+2 && yytext[posE+2]=='0')
+                    printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
+                else
+                    printf("T_DOU(%s) ",yytext);
+            }
+            
+            else{
+                if(strlen(yytext)-1>posE+1 && yytext[posE+1]=='0')
+                    printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
+                else
+                    printf("T_DOU(%s) ",yytext);
+            }
+        }
     }
     
     else{
@@ -848,13 +860,15 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 85 "flexFile.l"
+#line 97 "flexFile.l"
 {
+    column+=strlen(yytext);
+
     if(strlen(yytext)>31){
-        printf("Greska: identeifikator %s je predug",yytext);
+        printf("Greska: identeifikator na liniji %d i koloni %d '%s' je predug\n",row,column,yytext);
     }
     else if(yytext[0]=='_')
-        printf("Greska: identifikator %s ne moze da pocne sa _",yytext);
+        printf("Greska: identifikator na liniji %d i koloni %d '%s' ne moze da pocne sa _\n",row,column,yytext);
     else{
         printf("T_ID(%s) ",yytext);
     }
@@ -862,115 +876,115 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 96 "flexFile.l"
+#line 110 "flexFile.l"
 { printf("T_+"); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 97 "flexFile.l"
+#line 111 "flexFile.l"
 { printf("T_-"); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 98 "flexFile.l"
+#line 112 "flexFile.l"
 { printf("T_*"); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 99 "flexFile.l"
+#line 113 "flexFile.l"
 { printf("T_/"); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 100 "flexFile.l"
+#line 114 "flexFile.l"
 { printf("T_%"); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 101 "flexFile.l"
+#line 115 "flexFile.l"
 { printf("T_<"); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 102 "flexFile.l"
+#line 116 "flexFile.l"
 { printf("T_<="); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 103 "flexFile.l"
+#line 117 "flexFile.l"
 { printf("T_>"); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 104 "flexFile.l"
+#line 118 "flexFile.l"
 { printf("T_>="); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 105 "flexFile.l"
+#line 119 "flexFile.l"
 { printf("T_="); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 106 "flexFile.l"
+#line 120 "flexFile.l"
 { printf("T_=="); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 107 "flexFile.l"
+#line 121 "flexFile.l"
 { printf("T_!="); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 108 "flexFile.l"
+#line 122 "flexFile.l"
 { printf("T_&&"); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 109 "flexFile.l"
+#line 123 "flexFile.l"
 { printf("T_||"); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 110 "flexFile.l"
+#line 124 "flexFile.l"
 { printf("T_!"); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 111 "flexFile.l"
+#line 125 "flexFile.l"
 { printf("T_;"); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 112 "flexFile.l"
+#line 126 "flexFile.l"
 { printf("T_,"); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 114 "flexFile.l"
+#line 128 "flexFile.l"
 { printf("T_("); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 115 "flexFile.l"
+#line 129 "flexFile.l"
 { printf("T_)"); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 119 "flexFile.l"
+#line 133 "flexFile.l"
 { row++;column = 1; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 122 "flexFile.l"
+#line 136 "flexFile.l"
 {column++;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 125 "flexFile.l"
+#line 139 "flexFile.l"
 ECHO;
 	YY_BREAK
-#line 974 "lex.yy.c"
+#line 988 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1856,5 +1870,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 125 "flexFile.l"
+#line 139 "flexFile.l"
 

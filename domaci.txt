@@ -12,6 +12,7 @@ NEJANSOCE
     znak nije obavezan kod eksponenta(koji znak? +-) ? jeste misli se na + -
     kljucne rijeci velikim slovom, zasto kansije pise if kljucna rijec ? greska
 
+    u flexu ne moze . i \ da mi se prepozna
     command := SKIP ??? sta je ovo
     ima ::=, ali sta je :=
     IF exp - zar exp ne bi trebalo da bude logicki izraz

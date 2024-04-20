@@ -51,3 +51,9 @@
 %token T_DOUBLECONST
 %token T_BOOLCONST
 %token T_STRCONST
+
+int main(){
+    
+    
+    return 0;
+}

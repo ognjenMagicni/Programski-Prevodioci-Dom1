@@ -28,28 +28,28 @@
 "BOOLCONST" {printf("T_BOOLCONST ");}
 "STRCONST" {printf("T_STRCONST ");}
 
-[0-9]+ {
+[0-9]+ {   
     column+=strlen(yytext);
     if(strlen(yytext)>1){
         if(yytext[0]=='0')
-            printf("Greska: los decimalni broj '%s' na liniji %d i koloni %d",yytext,row,column);
+            printf("Greska: los decimalni broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
         else
-            printf("T_DECN(%s) ",yytext);    
+            printf("T_DEC(%s) ",yytext);    
     }else{
-        printf("T_DECN(%s) ",yytext);
+        printf("T_DEC(%s) ",yytext);
     }
     }
 (0x|0X)([0-9a-fA-F]*) {
     column+=strlen(yytext);
     if(strlen(yytext)==2)
-        printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d",yytext,row,column);
+        printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
     else if(strlen(yytext)>3){
         if(yytext[2]=='0')
-            printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d",yytext,row,column);
+            printf("Greska: los heksadecimalni broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
         else
-            printf("T_HEXN(%s) ",yytext);    
+            printf("T_HEX(%s) ",yytext);    
     }else{
-        printf("T_HEXN(%s) ",yytext);
+        printf("T_HEX(%s) ",yytext);
     }
     }
 
@@ -63,18 +63,30 @@
     char* ptre = strchr(yytext,'e');
 
     if(posDot==0)
-        printf("Greska: los double broj '%s' na liniji %d i koloni %d",yytext,row,column);
+        printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
 
     else if(posDot>1 && yytext[0]=='0')
-        printf("Greska: los double broj '%s' na liniji %d i koloni %d",yytext,row,column);
+        printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
 
     else if(ptrE!=NULL || ptre!=NULL){
-        int posE = ptrE!=NULL? (ptrE-yytext):(ptre-yytext);
+        int posE = (ptrE!=NULL)? (ptrE-yytext):(ptre-yytext);
         if(strlen(yytext)-1==posE)
-            printf("Greska: los double broj '%s' na liniji %d i koloni %d",yytext,row,column);
-        /*else{
-            posE = yytext[posE]=='+' || yytext[posE]=='-'?;
-        }*/
+            printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
+        else{
+            if(yytext[posE+1]=='+' || yytext[posE+1]=='-'){
+                if(strlen(yytext)-1>posE+2 && yytext[posE+2]=='0')
+                    printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
+                else
+                    printf("T_DOU(%s) ",yytext);
+            }
+            
+            else{
+                if(strlen(yytext)-1>posE+1 && yytext[posE+1]=='0')
+                    printf("Greska: los double broj '%s' na liniji %d i koloni %d\n",yytext,row,column);
+                else
+                    printf("T_DOU(%s) ",yytext);
+            }
+        }
     }
     
     else{
@@ -86,10 +98,10 @@
     column+=strlen(yytext);
 
     if(strlen(yytext)>31){
-        printf("Greska: identeifikator na liniji %d i koloni %d '%s' je predug",row,column,yytext);
+        printf("Greska: identeifikator na liniji %d i koloni %d '%s' je predug\n",row,column,yytext);
     }
     else if(yytext[0]=='_')
-        printf("Greska: identifikator na liniji %d i koloni %d '%s' ne moze da pocne sa _",row,column,yytext);
+        printf("Greska: identifikator na liniji %d i koloni %d '%s' ne moze da pocne sa _\n",row,column,yytext);
     else{
         printf("T_ID(%s) ",yytext);
     }
