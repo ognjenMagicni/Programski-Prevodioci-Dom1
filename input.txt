@@ -1,6 +1,8 @@
-prom111111111111prom111111111111prom111111111111prom111111111111 = 5;
-IF prom==5 THEN
-    prom = prom+1;
-ELSE
-    prom = 0005;
-FI
+LET
+    INT x
+IN
+    x = 5;
+END
+
+//SKIP;
+

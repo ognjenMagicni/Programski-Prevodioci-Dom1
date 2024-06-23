@@ -1,0 +1,84 @@
+5
+
+//5=5=5
+//a < b == c 
+a < b >= c 
+
+//provera da li radi komanda
+/*SKIP
+SKIP
+SKIP
+
+//promenjiva
+x = 5
+marko = 5+(6-1)*2
+//_ivan = 3*3    //lose
+
+IF 3==4 THEN x=5+5 ELSE x=1+1 FI
+
+WHILE 5>=6 DO x=3 END READ xyz WRITE 5
+
+
+//proveravam da li funkcionise kad je ovako formatirano
+IF 3==4
+THEN 
+    x=5+5 
+ELSE 
+    x=1+1 
+FI
+
+WHILE
+    5>=6 
+DO 
+    x=3 
+END
+
+//proveravam da li funkcionise sa command sequence
+IF 3==4
+THEN 
+    x=5+ y = x + 5  //iz nekog razloga ovo funkcionise
+ELSE 
+    x=18
+    y = x-18
+FI
+
+WHILE
+    5>=6 
+DO 
+    x=18
+    y = x-18
+END
+*/
+
+
+//za proveru skipa
+/*
+LET
+    INT x z a
+    INT y
+    STRING bnm aa
+IN
+IF 3==4
+THEN 
+    x=5+5 ;
+ELSE 
+    x=1+1 ;
+FI
+END
+
+//SKIP;
+
+WHILE
+    5>=6 
+DO 
+    x=3 ;
+    y=5;
+    c=x+y;
+    SKIP;
+    WRITE 5;
+END
+END
+*/
+
+
+

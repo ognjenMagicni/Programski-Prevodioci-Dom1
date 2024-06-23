@@ -1,0 +1,10 @@
+dodao sam exp == exp, nije ga prije bilo a pominje se
+uklonio sam exp = exp, jer nema smisla 6 = 7
+za exp ^ exp nije objanjseno nista
+ako ti javlja dobro za y=5=5 to je zato sto postoji expression exp=exp
+izbacio sam ovo sa id_seq jer je visak
+
+dodacu int FUNCTION ime PARAMETER int x,int y IN command_seq return exp FUNCTION_END
+FUNCTION ime PARAMETER int x,int y IN command_seq return exp FUNCTION_END
+
+poziv ime(x,y,z)

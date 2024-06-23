@@ -1,0 +1,11 @@
+LET
+    INT x z a
+    INT y
+    STRING bnm aa
+IN
+    INT FUNCTION ime PARAMETER INT x y z STRING a b IN
+        x=5;
+        RETURN x;
+    FUNCTIONEND 
+     x = ime PARAMETER y z;
+END
