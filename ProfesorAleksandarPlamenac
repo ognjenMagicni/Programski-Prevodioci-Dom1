@@ -1,6 +1,0 @@
-Dobar dan profesore, u ovom fajlu ću Vam napisati kako je organizovan moj kod.
-
-U "flexFile.l" je kod za flex, odnosno skener. 
-U "input.txt" i "inputText.txt" su ulazi za skener koje sam ja otkucao, tako da ne morate Vi da pišete i proveravate kod. Mislim da ova dva input teksta pokrivaju sve pravilne i nepravilne slučajeve.
-
-"skener.exe" bi trebao da vrati token i vrijednost u njemu ako je sve ispravno, npr. (T_DEC(52), za decimalni broj 52) ili grešku, gde upozorava na kojoj liniji i koloni je nastala.
